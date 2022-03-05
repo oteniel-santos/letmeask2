@@ -50,7 +50,7 @@ export function useRoom(roomId: string){
             isAnswered: value.isAnswered,
             likeCount: Object.values(value.likes ?? {}).length,
             hasLiked: Object.values(value.likes ?? {}).some(likes => likes.authorId === user?.id),
-            likeId: Object.entries(value.likes ?? {}).find(([key,like])=>like.authorId === user?.id)[0],
+            likeId: Object.entries(value.likes ?? {}).find(([key,like])=>like.authorId === user?.id)?.[0],
           }
         })
         setTitle(databaseRoom.title);

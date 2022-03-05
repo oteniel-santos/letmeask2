@@ -8,7 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 import {database, ref, onValue, push, set } from "../services/firebase"
 import "../styles/room.scss"
 import {useRoom} from '../hooks/useRoom';
-import { remove } from 'firebase/database';
+import { remove, update } from 'firebase/database';
 
 type RoomParams = {
   id: string;
@@ -47,7 +47,7 @@ export function Room(){
     
   async function handleLikeQuestion(questionId: string, likeId: string | undefined ){
     if(likeId){
-      const newLike = await ref(database, `rooms/${roomId}/questions/${questionId}/likes`);
+      const newLike = await ref(database, `rooms/${roomId}/questions/${questionId}/likes/${likeId}`);
       remove(newLike);
     }else{
       const newLike = await ref(database, `rooms/${roomId}/questions/${questionId}/likes`);
@@ -57,13 +57,18 @@ export function Room(){
     })
   }  
 }  
+
+
   
   return(
     <div id="page-room">
       <header>
         <div className = "content">
           <img src={logoImg} alt="Letmeask" />
+          <div>
             <RoomCode code  ={roomId!} />
+            
+          </div>
             
         </div>
       </header>
@@ -84,7 +89,8 @@ export function Room(){
           {user? (
             <div className="user-info">
               <img src={user.avatar} alt={user.name} />
-              <span> {user.name} </span>   
+              <span> {user.name} </span>  
+              {console.log(user)}; 
             </div>
           ): (
             <span>Para enviar sua pergunta, <button> faça seu login </button>.</span>
