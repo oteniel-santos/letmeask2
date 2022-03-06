@@ -39,9 +39,6 @@ export function Home(){
        navigate('/');
        return;
      } 
-
-
-
     navigate(`/rooms/${roomCode}`);
   }
 

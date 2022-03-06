@@ -5,7 +5,7 @@ import { useAuth } from "./useAuth";
 
 
 
-type Question = {
+type QuestionType = {
   id: string;
   author: {
     name: string,
@@ -33,7 +33,7 @@ type FirebaseQuestions = Record<string , {
 
 export function useRoom(roomId: string){
   const {user} = useAuth();
-  const [ questions, setQuestions] = useState<Question[]>([]);
+  const [ questions, setQuestions] = useState<QuestionType[]>([]);
   const [title, setTitle] = useState('')
 
   useEffect(() =>{
